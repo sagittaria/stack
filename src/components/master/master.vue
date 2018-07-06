@@ -7,7 +7,7 @@
           :default-active="activeMenuItem"
           :active="activeMenuItem">
           <el-menu-item index="/master/statistic">统计</el-menu-item>
-          <el-menu-item index="/master/article">文章</el-menu-item>
+          <el-menu-item index="/master/post">文章</el-menu-item>
         </el-menu>
       </el-aside>
       <el-main><router-view/></el-main>

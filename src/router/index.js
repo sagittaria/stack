@@ -11,9 +11,9 @@ export default new Router({
       path: '/',
       component: index,
       children: [
-        {path: '', name: 'index', component: resolve => require(['../components/article-list.vue'], resolve)},
-        {path: 'tech', name: 'article-list-tech', component: resolve => require(['../components/article-list.vue'], resolve)},
-        {path: 'idea', name: 'article-list-idea', component: resolve => require(['../components/article-list.vue'], resolve)}
+        {path: '', name: 'cover', component: resolve => require(['../components/post-list.vue'], resolve)},
+        {path: 'tech', name: 'post-list-tech', component: resolve => require(['../components/post-list.vue'], resolve)},
+        {path: 'idea', name: 'post-list-idea', component: resolve => require(['../components/post-list.vue'], resolve)}
       ]
     },
     {path: '/login', component: resolve => require(['../components/login.vue'], resolve)},
@@ -23,11 +23,11 @@ export default new Router({
       children: [
         {path: '', redirect: '/master/statistic'},
         {path: 'statistic', name: 'statistic', component: resolve => require(['../components/master/statistic.vue'], resolve)},
-        {path: 'article', redirect: '/master/article/list'},
-        {path: 'article/list', name: 'article-list', component: resolve => require(['../components/master/article-list.vue'], resolve)},
-        {path: 'article/add', name: 'article-add', component: resolve => require(['../components/master/article-add.vue'], resolve)},
-        {path: 'article/preview/:articleId', name: 'article-preview', component: resolve => require(['../components/master/article-preview.vue'], resolve)},
-        {path: 'article/edit/:articleId', name: 'article-edit', component: resolve => require(['../components/master/article-add.vue'], resolve)}
+        {path: 'post', redirect: '/master/post/list'},
+        {path: 'post/list', name: 'post-list', component: resolve => require(['../components/master/post-list.vue'], resolve)},
+        {path: 'post/add', name: 'post-add', component: resolve => require(['../components/master/post-add.vue'], resolve)},
+        {path: 'post/preview/:postId', name: 'post-preview', component: resolve => require(['../components/master/post-preview.vue'], resolve)},
+        {path: 'post/edit/:postId', name: 'post-edit', component: resolve => require(['../components/master/post-add.vue'], resolve)}
       ]
     },
     {
