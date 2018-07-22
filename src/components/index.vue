@@ -1,6 +1,7 @@
 <template>
   <el-container>
     <el-header>
+      <div style="line-height:60px;">{{blogName}}</div>
       <el-menu mode="horizontal" :router="true"
                :default-active="activeMenuItem"
                :active="activeMenuItem">
@@ -8,6 +9,7 @@
         <el-menu-item index="idea">道</el-menu-item>
         <el-menu-item index="tech">术</el-menu-item>
       </el-menu>
+      <div style="line-height:60px;">还不知道这边放什么好</div>
     </el-header>
     <el-main>
       <el-row type="flex" justify="center" :gutter="40">
@@ -21,10 +23,13 @@
 
 <script>
 import AsideMenu from '@/components/aside-menu.vue'
+import axios from 'axios'
 
 export default {
+  components: {AsideMenu},
   data () {
     return {
+      blogName: 'Origin'
     }
   },
   computed: {
@@ -32,14 +37,29 @@ export default {
       return this.$route.path.split('/')[1] ? this.$route.path.split('/')[1] : '/'
     }
   },
-  components: {AsideMenu}
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.getBlogName()
+    })
+  },
+  methods: {
+    getBlogName () {
+      let self = this
+      axios.get('/api/v0/getBlogName').then(resp => {
+        self.blogName = resp.data.blogName
+        console.log(resp)
+      }, error => {
+        console.log(error)
+      })
+    }
+  }
 }
 </script>
 
 <style scoped>
 .el-header{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .el-menu{
   /*width:60%;*/
