@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://git.walltechsystem.com:3000/mock/17',
+        target: 'http://yapi.demo.qunar.com/mock/14711/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
