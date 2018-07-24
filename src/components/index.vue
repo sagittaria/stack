@@ -24,6 +24,7 @@
 <script>
 import AsideMenu from '@/components/aside-menu.vue'
 import axios from 'axios'
+import util from '@/assets/util.js'
 
 export default {
   components: {AsideMenu},
@@ -45,7 +46,7 @@ export default {
   methods: {
     getBlogName () {
       let self = this
-      axios.get('/api/v0/getBlogName').then(resp => {
+      axios.get(util.api.getBlogName).then(resp => {
         self.blogName = resp.data.blogName
         console.log(resp)
       }, error => {
