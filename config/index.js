@@ -14,9 +14,6 @@ module.exports = {
       '/api': {
         target: 'http://yapi.demo.qunar.com/mock/14711/',
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
       }
     },
 
