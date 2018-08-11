@@ -46,8 +46,14 @@ export default {
   methods: {
     getBlogName () {
       let self = this
+      if (localStorage.getItem('sagi-blog-name') === 'Stack') {
+        console.log('need no more GET')
+        self.blogName = localStorage.getItem('sagi-blog-name')
+        return // need no more GET
+      }
       axios.get(util.api.getBlogName).then(resp => {
         self.blogName = resp.data.blogName
+        localStorage.setItem('sagi-blog-name', resp.data.blogName)
         console.log(resp)
       }, error => {
         console.log(error)
@@ -69,6 +75,5 @@ export default {
 }
 .content{
   min-height: 768px;
-  border: 1px solid crimson;
 }
 </style>
