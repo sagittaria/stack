@@ -29,7 +29,7 @@ export default {
     return {
       postList: [{
         _id: '123',
-        category: 'nonsense',
+        category: 'idea',
         title: 'Self introduction from VBPbpd',
         tags: ['瞎搞', '后现代'],
         updatedAt: '2018-08-13 17:00:00',
@@ -37,7 +37,7 @@ export default {
         // showAll: false
       }, {
         _id: '234',
-        category: 'nonsense',
+        category: 'tech',
         title: '2nd 部分 of V Self bp 的介绍',
         tags: ['瞎搞', '后现代'],
         updatedAt: '2018-08-12 18:00:00',
@@ -69,7 +69,7 @@ export default {
 
 <style scoped>
 .a-post{
-  border-top:1px solid #fbe6ea;
+  border-top:1px solid #f2f2f2;
   text-align: left;
   line-height:1.6rem;
   margin-bottom:24px;
@@ -80,7 +80,7 @@ export default {
   font-size:1.4rem;
   color:#d4002a;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
 }
 .a-post-head-group{
   display: flex;
@@ -94,7 +94,8 @@ export default {
   padding:0 1rem;
 }
 .a-post-updated-at{
-  font-size:0.8rem;
+  font-size:0.9rem;
+  margin-left: 1em;
 }
 .a-post-tag{
   font-size:1rem;

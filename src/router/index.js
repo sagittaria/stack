@@ -11,9 +11,7 @@ export default new Router({
       path: '/',
       component: index,
       children: [
-        {path: '', name: 'cover', component: resolve => require(['../components/post-list.vue'], resolve)},
-        {path: 'tech', name: 'post-list-tech', component: resolve => require(['../components/post-list.vue'], resolve)},
-        {path: 'idea', name: 'post-list-idea', component: resolve => require(['../components/post-list.vue'], resolve)}
+        {path: '', name: 'cover', component: resolve => require(['../components/post-list.vue'], resolve)}
       ]
     },
     {path: '/login', component: resolve => require(['../components/login.vue'], resolve)},

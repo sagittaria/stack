@@ -2,14 +2,7 @@
   <el-container>
     <el-header>
       <div style="line-height:60px;">{{blogName}}</div>
-      <el-menu mode="horizontal" :router="true"
-               :default-active="activeMenuItem"
-               :active="activeMenuItem">
-        <el-menu-item index="/"><i class="el-icon-news"></i></el-menu-item>
-        <el-menu-item index="idea">道</el-menu-item>
-        <el-menu-item index="tech">术</el-menu-item>
-      </el-menu>
-      <div style="line-height:60px;">还不知道这边放什么好</div>
+      <div style="line-height:60px;">本性不移.</div>
     </el-header>
     <el-main>
       <el-row type="flex" justify="center" :gutter="40">
@@ -31,11 +24,6 @@ export default {
   data () {
     return {
       blogName: 'Origin'
-    }
-  },
-  computed: {
-    activeMenuItem () {
-      return this.$route.path.split('/')[1] ? this.$route.path.split('/')[1] : '/'
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -65,13 +53,10 @@ export default {
 
 <style scoped>
 .el-header{
+  width: 66%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-}
-.el-menu{
-  /*width:60%;*/
-  display: flex;
-  justify-content: center;
 }
 .content{
   min-height: 768px;
