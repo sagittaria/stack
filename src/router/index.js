@@ -19,13 +19,10 @@ export default new Router({
       path: '/master',
       component: master,
       children: [
-        {path: '', redirect: '/master/statistic'},
-        {path: 'statistic', name: 'statistic', component: resolve => require(['../components/master/statistic.vue'], resolve)},
-        {path: 'post', redirect: '/master/post/list'},
-        {path: 'post/list', name: 'post-list', component: resolve => require(['../components/master/post-list.vue'], resolve)},
+        {path: '', redirect: {name: 'post-all'}},
+        {path: 'post/all', name: 'post-all', component: resolve => require(['../components/master/post-all.vue'], resolve)},
         {path: 'post/add', name: 'post-add', component: resolve => require(['../components/master/post-add.vue'], resolve)},
-        {path: 'post/preview/:postId', name: 'post-preview', component: resolve => require(['../components/master/post-preview.vue'], resolve)},
-        {path: 'post/edit/:postId', name: 'post-edit', component: resolve => require(['../components/master/post-add.vue'], resolve)}
+        {path: 'post/add/:postId', name: 'post-edit', component: resolve => require(['../components/master/post-add.vue'], resolve)}
       ]
     },
     {

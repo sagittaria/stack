@@ -6,8 +6,8 @@
         <el-menu :router="true"
           :default-active="activeMenuItem"
           :active="activeMenuItem">
-          <el-menu-item index="/master/statistic">统计</el-menu-item>
-          <el-menu-item index="/master/post">文章</el-menu-item>
+          <el-menu-item index="/master/post/all">全部</el-menu-item>
+          <el-menu-item index="/master/post/add">新增</el-menu-item>
         </el-menu>
       </el-aside>
       <el-main><router-view/></el-main>
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     activeMenuItem () {
-      return '/master/' + this.$route.path.split('/')[2]
+      return '/master/post/' + this.$route.path.split('/')[3]
     }
   }
 }
