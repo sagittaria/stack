@@ -30,3 +30,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .el-main{
+    padding-top: 0;
+  }
+</style>

@@ -14,7 +14,7 @@
         </div>
         <div class="a-post-body">
           <span v-if="post.showAll">{{post.body}}</span>
-          <span v-else>{{truncatedPostBody(post.body, 20)}}</span>
+          <span v-else>{{truncatedPostBody(post.body, 100)}}</span>
           <a href="javascript:void(0)" @click="toggleDisplay(post)">{{post.showAll ? 'Less' : 'All'}}</a></div>
       </div>
     </template>
@@ -42,6 +42,14 @@ export default {
         tags: ['瞎搞', '后现代'],
         updatedAt: '2018-08-12 18:00:00',
         body: ' and Vouchsafing the Violently Vicious and Voracious Violation of Volition.The only Verdict is Vengeance,a Vendetta held as a VotiVe not in Vain,for the Value and Veracity of such shall one day Vindicate the Vigilant and the Virtuous.Verily,this Vichyssoise of Verbiage Veers most Verbose. So let me simply add that it\'s my Very good honor to meet you and you may call me V.'
+        // showAll: false
+      }, {
+        _id: '456',
+        category: 'tech',
+        title: '2nd 部分 of V Self bp 的介绍',
+        tags: ['瞎搞', '后现代'],
+        updatedAt: '2018-08-12 18:00:00',
+        body: 'So let me simply add that it\'s my Very good honor to meet you and you may call me V.'
         // showAll: false
       }]
     }
