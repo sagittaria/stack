@@ -11,7 +11,8 @@
     <div class="aside-menu-block">
       <div class="aside-menu-bar"><i class="el-icon-star-off"></i> Tags</div>
       <div class="aside-menu-content">
-        <el-tag type="danger" size="mini">琵琶</el-tag>
+        <el-tag type="danger" size="mini">爬虫</el-tag>
+        <el-tag type="danger" size="mini">量化</el-tag>
       </div>
     </div>
     <div class="aside-menu-block">

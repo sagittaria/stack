@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://yapi.demo.qunar.com/mock/14711/',
+        // target: 'http://yapi.demo.qunar.com/mock/14711/',
+        target: 'http://localhost:3000/',
         changeOrigin: true,
       }
     },
