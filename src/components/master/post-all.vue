@@ -62,7 +62,7 @@ export default {
     del (id) {
       // console.log(id)
       let self = this
-      self.$confirm('delete this post?', 'warning!').then(() => {
+      self.$confirm('do you really want to delete this post?', 'warning!').then(() => {
         axios.delete(util.api.post + id).then(resp => {
           self.$message({message: '删除成功', type: 'success'})
           self.getPosts()
@@ -82,5 +82,8 @@ export default {
   }
   .el-table {
     text-align: left;
+  }
+  .el-tag{
+    margin-right:6px;
   }
 </style>
