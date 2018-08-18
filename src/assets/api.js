@@ -1,10 +1,11 @@
 const api = {
   // nonsense
-  getBlogName: '/api/v0/getBlogName',
-  login: '/login',
-  logout: '/logout',
+  // getBlogName: '/api/v0/getBlogName',
+  // login: '/login',
+  // logout: '/logout',
+
   // post
-  post: '/api/v0/master/post'
+  post: '/stack/post/'
 }
 
 export default api

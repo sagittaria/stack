@@ -47,6 +47,11 @@ export default {
       newTagInputValue: ''
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.getPost()
+    })
+  },
   methods: {
     handleClose (tag) {
       this.post.tags.splice(this.post.tags.indexOf(tag), 1)
@@ -65,13 +70,32 @@ export default {
       this.newTagInputVisible = false
       this.newTagInputValue = ''
     },
-    doSavePost () {
+    getPost () {
+      let self = this
+      let id = self.$route.params.id
+      if (id) {
+        axios.get(util.api.post + id).then(resp => {
+          // console.log(resp)
+          self.post = resp.data
+        })
+      }
+    },
+    doSavePost () { // 保存或更新
       this.post.updatedAt = util.kits.moment().format('YYYY-MM-DD HH:mm:ss')
-      axios.post(util.api.post, this.post).then(resp => {
-        console.log(resp)
-      }, err => {
-        console.log(err)
-      })
+      let id = this.$route.params.id
+      if (id) {
+        axios.put(util.api.post + id, this.post).then(resp => {
+          console.log(resp)
+        }, err => {
+          console.log(err)
+        })
+      } else {
+        axios.post(util.api.post, this.post).then(resp => {
+          console.log(resp)
+        }, err => {
+          console.log(err)
+        })
+      }
     }
   },
   computed: {

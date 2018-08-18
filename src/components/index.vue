@@ -16,8 +16,8 @@
 
 <script>
 import AsideMenu from '@/components/aside-menu.vue'
-import axios from 'axios'
-import util from '@/assets/util.js'
+// import axios from 'axios'
+// import util from '@/assets/util.js'
 
 export default {
   components: {AsideMenu},
@@ -28,25 +28,25 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.getBlogName()
+      // vm.getBlogName()
     })
   },
   methods: {
-    getBlogName () {
-      let self = this
-      if (localStorage.getItem('sagi-blog-name') === 'Stack') {
-        console.log('need no more GET')
-        self.blogName = localStorage.getItem('sagi-blog-name')
-        return // need no more GET
-      }
-      axios.get(util.api.getBlogName).then(resp => {
-        self.blogName = resp.data.blogName
-        localStorage.setItem('sagi-blog-name', resp.data.blogName)
-        console.log(resp)
-      }, error => {
-        console.log(error)
-      })
-    }
+    // getBlogName () {
+    //   let self = this
+    //   if (localStorage.getItem('sagi-blog-name') === 'Stack') {
+    //     console.log('need no more GET')
+    //     self.blogName = localStorage.getItem('sagi-blog-name')
+    //     return // need no more GET
+    //   }
+    //   axios.get(util.api.getBlogName).then(resp => {
+    //     self.blogName = resp.data.blogName
+    //     localStorage.setItem('sagi-blog-name', resp.data.blogName)
+    //     console.log(resp)
+    //   }, error => {
+    //     console.log(error)
+    //   })
+    // }
   }
 }
 </script>

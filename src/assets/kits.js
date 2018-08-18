@@ -16,7 +16,7 @@ marked.setOptions({
   smartypants: false
 })
 let preview = function (text) {
-  return marked(text)
+  return marked(text || '')
 }
 
 let kits = {}
