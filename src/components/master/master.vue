@@ -7,7 +7,8 @@
           :default-active="activeMenuItem"
           :active="activeMenuItem">
           <el-menu-item index="/master/post/all"><i class="el-icon-view"></i>全部</el-menu-item>
-          <el-menu-item index="/master/post/add"><i class="el-icon-edit"></i>新增</el-menu-item>
+          <el-menu-item index="/master/post/add" v-show="!$route.params.id"><i class="el-icon-circle-plus-outline"></i>新增</el-menu-item>
+          <el-menu-item index="/master/post/edit" v-show="$route.params.id" disabled><i class="el-icon-edit"></i>编辑</el-menu-item>
         </el-menu>
       </el-aside>
       <el-main><router-view/></el-main>

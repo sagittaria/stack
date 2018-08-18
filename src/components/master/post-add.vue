@@ -2,7 +2,7 @@
   <div class="post-editor">
     <div class="post-edit">
       <div class="post-edit-category-and-title">
-        <el-select class="post-category" v-model="post.category" clearable size="mini">
+        <el-select class="post-category" v-model="post.category" size="mini">
           <el-option v-for="c in categories" v-bind:key="c" :label="c" :value="c"></el-option>
         </el-select>
         <el-input class="post-title" v-model="post.title" size="mini"/>
@@ -37,11 +37,11 @@ export default {
     return {
       categories: ['tech', 'idea', 'other'],
       post: {
-        category: '',
+        category: 'other',
         title: '',
         body: '',
         updatedAt: '',
-        tags: ['python', 'quant']
+        tags: []
       },
       newTagInputVisible: false,
       newTagInputValue: ''
@@ -51,6 +51,10 @@ export default {
     next(vm => {
       vm.getPost()
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.resetNewPost()
+    next()
   },
   methods: {
     handleClose (tag) {
@@ -70,6 +74,9 @@ export default {
       this.newTagInputVisible = false
       this.newTagInputValue = ''
     },
+    resetNewPost () { // 先进编辑页面、再到新增，此时已编辑的旧文应该被清空
+      this.post = {category: 'other', title: '', body: '', updatedAt: '', tags: []}
+    },
     getPost () {
       let self = this
       let id = self.$route.params.id
@@ -83,15 +90,18 @@ export default {
     doSavePost () { // 保存或更新
       this.post.updatedAt = util.kits.moment().format('YYYY-MM-DD HH:mm:ss')
       let id = this.$route.params.id
+      let self = this
       if (id) {
-        axios.put(util.api.post + id, this.post).then(resp => {
-          console.log(resp)
+        axios.put(util.api.post + id, self.post).then(resp => {
+          // console.log(resp)
+          self.$router.push({name: 'post-all'})
         }, err => {
           console.log(err)
         })
       } else {
-        axios.post(util.api.post, this.post).then(resp => {
-          console.log(resp)
+        axios.post(util.api.post, self.post).then(resp => {
+          // console.log(resp)
+          self.$router.push({name: 'post-all'})
         }, err => {
           console.log(err)
         })

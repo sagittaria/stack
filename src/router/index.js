@@ -22,7 +22,7 @@ export default new Router({
         {path: '', redirect: {name: 'post-all'}},
         {path: 'post/all', name: 'post-all', component: resolve => require(['../components/master/post-all.vue'], resolve)},
         {path: 'post/add', name: 'post-add', component: resolve => require(['../components/master/post-add.vue'], resolve)},
-        {path: 'post/add/:id', name: 'post-edit', component: resolve => require(['../components/master/post-add.vue'], resolve)}
+        {path: 'post/edit/:id', name: 'post-edit', component: resolve => require(['../components/master/post-add.vue'], resolve)}
       ]
     },
     {
