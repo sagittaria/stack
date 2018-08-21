@@ -9,13 +9,13 @@
             <div class="a-post-tag" v-for="tag in post.tags" v-bind:key="tag">{{tag}}</div>
           </div>
           <div class="a-post-head-group">
-            <div class="a-post-updated-at">{{post.updatedAt}}</div>
+            <div class="a-post-updated-at">{{format(post.updatedAt)}}</div>
           </div>
         </div>
         <div class="a-post-body">
-          <span v-if="post.showAll">{{post.body}}</span>
-          <span v-else>{{truncatedPostBody(post.body, 100)}}</span>
-          <a href="javascript:void(0)" @click="toggleDisplay(post)">{{post.showAll ? 'Less' : 'All'}}</a></div>
+          <div v-if="post.showAll" v-html="markdownalize(post.body)"></div>
+          <span v-else>{{thumbnail(post.body, 100)}}</span>
+          <a href="javascript:void(0)" @click="toggleDisplay(post)">{{post.showAll ? 'Less' : 'View'}}</a></div>
       </div>
     </template>
   </div>
@@ -23,45 +23,30 @@
 
 <script>
 import util from '@/assets/util.js'
+import axios from 'axios'
 
 export default {
   data () {
     return {
-      postList: [{
-        _id: '123',
-        category: 'idea',
-        title: 'Self introduction from VBPbpd',
-        tags: ['瞎搞', '后现代'],
-        updatedAt: '2018-08-13 17:00:00',
-        body: 'In View,a humble VaudeVillian Veteran cast Vicariously as both Victim and Villain by the Vicissitudes of fate.This Visage,no mere Veneer of Vanity is a Vestige of the Vox populi,now Vacant,Vanished.However,this Valorous Visitation of a bygone Vexation stands Vivified and has Vowed to Vanquish these Venal and Virulent Vermin Vanguarding Vice'
-        // showAll: false
-      }, {
-        _id: '234',
-        category: 'tech',
-        title: '2nd 部分 of V Self bp 的介绍',
-        tags: ['瞎搞', '后现代'],
-        updatedAt: '2018-08-12 18:00:00',
-        body: ' and Vouchsafing the Violently Vicious and Voracious Violation of Volition.The only Verdict is Vengeance,a Vendetta held as a VotiVe not in Vain,for the Value and Veracity of such shall one day Vindicate the Vigilant and the Virtuous.Verily,this Vichyssoise of Verbiage Veers most Verbose. So let me simply add that it\'s my Very good honor to meet you and you may call me V.'
-        // showAll: false
-      }, {
-        _id: '456',
-        category: 'tech',
-        title: '2nd 部分 of V Self bp 的介绍',
-        tags: ['瞎搞', '后现代'],
-        updatedAt: '2018-08-12 18:00:00',
-        body: 'So let me simply add that it\'s my Very good honor to meet you and you may call me V.'
-        // showAll: false
-      }]
+      postList: []
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.getPosts()
+    })
+  },
   methods: {
-    markdownalize (text) {
-      let markdownalHtml = text
-      // 用意是将text做成markdown格式
-      return markdownalHtml
+    getPosts () {
+      axios.get(util.api.post).then(resp => {
+        this.postList = resp.data
+      })
     },
-    truncatedPostBody (text, len) {
-      return util.kits.truncate(text, len)
+    markdownalize (srcText) {
+      return util.kits.preview(srcText)
+    },
+    thumbnail (srcText, len) {
+      return util.kits.getInnerText(srcText).substr(0, len) + '...'
     },
     toggleDisplay (post) {
       let self = this
@@ -70,6 +55,9 @@ export default {
       } else {
         post.showAll = !post.showAll
       }
+    },
+    format (d) {
+      return util.kits.moment(d).utcOffset(8).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }
@@ -100,6 +88,7 @@ export default {
   color:white;
   background-color: #d4002a;
   padding:0 1rem;
+  height: 1.6rem;
 }
 .a-post-updated-at{
   font-size:0.9rem;

@@ -1,9 +1,6 @@
 var marked = require('marked')
 var moment = require('moment')
-
-let truncate = function (text, len) {
-  return text.length > len ? text.substr(0, len) + '...' : text
-}
+var cheerio = require('cheerio')
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -18,10 +15,14 @@ marked.setOptions({
 let preview = function (text) {
   return marked(text || '')
 }
+let getInnerText = function (text) {
+  let $ = cheerio.load(preview(text))
+  return $.text()
+}
 
 let kits = {}
-kits.truncate = truncate
 kits.preview = preview
+kits.getInnerText = getInnerText
 kits.moment = moment
 
 export default kits
