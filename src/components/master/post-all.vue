@@ -16,6 +16,11 @@
             <el-tag v-for="t in scope.row.tags" v-bind:key="t" type="warning" size="mini">{{t}}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column label="updated">
+          <template slot-scope="scope">
+            <span>{{format(scope.row.updatedAt)}}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="operate">
           <template slot-scope="scope">
             <el-button type="danger" @click="edit(scope.row._id)" icon="el-icon-edit-outline" size="mini" circle plain></el-button>
@@ -68,6 +73,9 @@ export default {
           self.getPosts()
         })
       }).catch(() => {})
+    },
+    format (d) {
+      return util.kits.moment(d).utcOffset(8).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }
