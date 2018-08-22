@@ -20,7 +20,7 @@
           @keyup.enter.native="handleInputConfirm"
           @blur="handleInputConfirm"
         />
-        <el-button v-else type="info" size="mini" @click="showInput" plain>+ New Tag</el-button>
+        <el-button v-else type="default" size="mini" @click="showInput" plain>+ New Tag</el-button>
       </div>
       <el-input type="textarea" :autosize="{minRows: 32, maxRows: 32}" class="post-body" v-model="post.body"/>
     </div>
