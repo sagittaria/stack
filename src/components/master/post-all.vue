@@ -39,7 +39,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      categories: ['nonsense', 'boring'],
+      categories: ['idea', 'tech', 'other'],
       filter: {
         category: '',
         title: '',

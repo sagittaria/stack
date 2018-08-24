@@ -18,7 +18,9 @@
     <div class="aside-menu-block">
       <div class="aside-menu-bar"></div>
       <div class="aside-menu-content">
-        <el-input prefix-icon="el-icon-search" size="mini"></el-input>
+        <el-input prefix-icon="el-icon-search" placeholder=" 有钱的捧个钱场~" size="mini"></el-input>
+        <div><img src="/static/card.jpeg" style="width:100%;"/></div>
+        <div><i class="el-icon-arrow-right"></i> 没钱的，您也捧个钱场呀~</div>
       </div>
     </div>
   </div>
