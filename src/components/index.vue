@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <div style="line-height:60px;">{{blogName}}</div>
-      <div style="line-height:60px;">本性不移.</div>
+      <div style="line-height:60px;">{{motto}}</div>
     </el-header>
     <el-main>
       <el-row type="flex" justify="center" :gutter="40">
@@ -23,7 +23,8 @@ export default {
   components: {AsideMenu},
   data () {
     return {
-      blogName: 'Origin'
+      blogName: 'Fishing Log',
+      motto: '三天打鱼，两天晒网'
     }
   },
   beforeRouteEnter (to, from, next) {

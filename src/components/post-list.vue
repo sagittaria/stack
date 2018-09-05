@@ -85,8 +85,8 @@ export default {
   margin-right: 0.5em;
 }
 .a-post-title{
-  color:white;
-  background-color: #d4002a;
+  color:#d4002a;
+  background-color: rgba(245,108,108,.1);
   padding:0 1rem;
   height: 1.6rem;
 }
