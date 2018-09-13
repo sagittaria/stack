@@ -33,7 +33,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env,
-      API_BASE: '"http://127.0.0.1:3000/"' // 没错，就是需要两层引号
+      API_BASE: '"https://52.15.126.86:3000/"' // 没错，就是需要两层引号
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
