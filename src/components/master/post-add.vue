@@ -88,7 +88,7 @@ export default {
       }
     },
     doSavePost () { // 保存或更新
-      this.post.updatedAt = util.kits.moment().format('YYYY-MM-DD HH:mm:ss')
+      this.post.updatedAt = util.kits.moment.utc().format('YYYY-MM-DD HH:mm:ss') // 按UTC时间存
       let id = this.$route.params.id
       let self = this
       if (id) {
