@@ -75,7 +75,7 @@ export default {
       }).catch(() => {})
     },
     format (d) {
-      return util.kits.moment(d).utcOffset(8).format('YYYY-MM-DD HH:mm:ss')
+      return util.kits.moment(d).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }
