@@ -28,6 +28,13 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page.sync="pagination.currentPage"
+        :page-size="pagination.pageSize"
+        layout="total, prev, pager, next, jumper"
+        :total="pagination.total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -45,20 +52,32 @@ export default {
         title: '',
         fromDate: ''
       },
-      postList: []
+      postList: [],
+      pagination: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 0
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.getPosts()
+      vm.getPosts(1)
     })
   },
   methods: {
-    getPosts () {
-      axios.get(util.api.post).then(resp => {
+    getPosts (page, rows) {
+      if (rows === undefined) {
+        rows = this.pagination.pageSize
+      }
+      axios.get(util.api.post, {params: {page, rows}}).then(resp => {
         // console.log(resp)
-        this.postList = resp.data
+        this.postList = resp.data.list
+        this.pagination.total = resp.data.total
       })
+    },
+    handleCurrentChange (page) {
+      this.getPosts(page)
     },
     edit (id) {
       // console.log(id)

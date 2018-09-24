@@ -33,13 +33,17 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.getPosts()
+      vm.getPosts(1, 7)
     })
   },
   methods: {
-    getPosts () {
-      axios.get(util.api.post).then(resp => {
-        this.postList = resp.data
+    getPosts (page, rows) {
+      if (rows === undefined) {
+        rows = this.pagination.pageSize
+      }
+      axios.get(util.api.post, {params: {page, rows}}).then(resp => {
+        // console.log(resp)
+        this.postList = resp.data.list
       })
     },
     markdownalize (srcText) {
