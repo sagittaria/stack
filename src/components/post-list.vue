@@ -18,6 +18,10 @@
           <a href="javascript:void(0)" @click="toggleDisplay(post)">{{post.showAll ? 'Less' : 'View'}}</a></div>
       </div>
     </template>
+    <div style="border-bottom:1px solid #f2f2f2;height:14px;">
+      <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- Load More -- </el-button>
+      <el-button type="text" size="mini" v-show="!hasMoreToLoad"> -- 我是有底线的 -- </el-button>
+    </div>
   </div>
 </template>
 
@@ -28,22 +32,36 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      postList: []
+      postList: [],
+      recentlyLoadedPage: 1,
+      hasMoreToLoad: true
     }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      vm.postList = []
       vm.getPosts(1, 7)
     })
   },
   methods: {
     getPosts (page, rows) {
-      if (rows === undefined) {
-        rows = this.pagination.pageSize
-      }
       axios.get(util.api.post, {params: {page, rows}}).then(resp => {
         // console.log(resp)
         this.postList = resp.data.list
+      })
+    },
+    loadMorePosts () {
+      let self = this
+      if (!self.hasMoreToLoad) {
+        return
+      }
+      let page = (self.recentlyLoadedPage + 1)
+      let rows = 7
+      axios.get(util.api.post, {params: {page, rows}}).then(resp => {
+        // console.log(resp)
+        self.recentlyLoadedPage++
+        self.postList.push(...resp.data.list)
+        self.hasMoreToLoad = resp.data.list.length === rows
       })
     },
     markdownalize (srcText) {
