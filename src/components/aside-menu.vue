@@ -1,18 +1,19 @@
 <template>
   <div class="aside-menu">
     <div class="aside-menu-block">
-      <div class="aside-menu-bar"><i class="el-icon-goods"></i> Category</div>
+      <div class="aside-menu-bar">
+        <i class="el-icon-goods"></i> Category <small style="color:#d3d3d3;float:right;"> - Cached at {{lastCachedAt}}</small>
+      </div>
       <div class="aside-menu-content">
-        <div class="post-category"> - idea</div>
-        <div class="post-category"> - tech</div>
-        <div class="post-category"> - other</div>
+        <div class="post-category"> - idea({{categoryCount.idea}})</div>
+        <div class="post-category"> - tech({{categoryCount.tech}})</div>
+        <div class="post-category"> - other({{categoryCount.other}})</div>
       </div>
     </div>
     <div class="aside-menu-block">
       <div class="aside-menu-bar"><i class="el-icon-star-off"></i> Tags</div>
       <div class="aside-menu-content">
-        <el-tag type="danger" size="mini">爬虫</el-tag>
-        <el-tag type="danger" size="mini">量化</el-tag>
+        <el-tag type="danger" size="mini" v-for="t in tagsCount" v-bind:key="t.tag">{{t.tag}}({{t.cnt}})</el-tag>
       </div>
     </div>
     <div class="aside-menu-block">
@@ -28,6 +29,22 @@
 
 <script>
 
+export default {
+  data () {
+    return {}
+  },
+  computed: {
+    categoryCount () {
+      return this.$store.state.cache.categoryCount
+    },
+    tagsCount () {
+      return this.$store.state.cache.tagsCount
+    },
+    lastCachedAt () {
+      return this.$store.getters.normalizedLastCachedAt
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -48,5 +65,9 @@
   }
   .post-category{
     cursor: pointer;
+    line-height:2em;
+  }
+  .el-tag{
+    margin: 5px;
   }
 </style>

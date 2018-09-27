@@ -16,38 +16,35 @@
 
 <script>
 import AsideMenu from '@/components/aside-menu.vue'
-// import axios from 'axios'
-// import util from '@/assets/util.js'
+import axios from 'axios'
+import util from '@/assets/util.js'
 
 export default {
   components: {AsideMenu},
   data () {
     return {
       blogName: 'Fishing Log',
-      motto: '三天打鱼，两天晒网'
+      motto: '三天打鱼，两天晒网',
+      expirationMinutes: 5 // 缓存失效时间（分钟）
     }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      // vm.getBlogName()
+      vm.updateCachedStuffIfNecessary()
     })
   },
   methods: {
-    // getBlogName () {
-    //   let self = this
-    //   if (localStorage.getItem('sagi-blog-name') === 'Stack') {
-    //     console.log('need no more GET')
-    //     self.blogName = localStorage.getItem('sagi-blog-name')
-    //     return // need no more GET
-    //   }
-    //   axios.get(util.api.getBlogName).then(resp => {
-    //     self.blogName = resp.data.blogName
-    //     localStorage.setItem('sagi-blog-name', resp.data.blogName)
-    //     console.log(resp)
-    //   }, error => {
-    //     console.log(error)
-    //   })
-    // }
+    updateCachedStuffIfNecessary () {
+      let self = this
+      let now = new Date().getTime()
+      if (now - self.$store.state.cache.lastCachedAt > self.expirationMinutes * 60 * 1000) { // 如果已超时，去数据库里重新捞一把
+        axios.get(util.api.post + 'cache').then(resp => {
+          let lastCachedStuff = resp.data
+          lastCachedStuff.lastCachedAt = now
+          self.$store.dispatch('updateCachedStuff', lastCachedStuff)
+        })
+      }
+    }
   }
 }
 </script>

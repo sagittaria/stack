@@ -5,6 +5,7 @@ import EUI from 'element-ui'
 import './assets/element-#D4002A/index.css'
 import App from './App'
 import router from './router'
+import store from './store'
 import axios from 'axios'
 
 Vue.use(EUI)
@@ -23,6 +24,7 @@ axios.defaults.withCredentials = true
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
