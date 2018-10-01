@@ -21,8 +21,8 @@ const cache = {
   mutations: {
     UPDATE_CACHED_STUFF: (state, lastCachedStuff) => {
       // state = lastCachedStuff // 别这么写，会碍到aside-menu上{{lastCachedAt}}的响应式表现
-      state.categoryCount = state.categoryCount
-      state.tagsCount = state.tagsCount
+      state.categoryCount = lastCachedStuff.categoryCount
+      state.tagsCount = lastCachedStuff.tagsCount
       state.lastCachedAt = lastCachedStuff.lastCachedAt
       sessionStorage.setItem('cacheState', JSON.stringify(state))
     }
