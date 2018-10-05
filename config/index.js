@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/stack': {
         // target: 'http://yapi.demo.qunar.com/mock/14711/',
-        target: 'https://localhost:3000/',
+        target: 'http://localhost:9527/',
         changeOrigin: true,
         secure: false
       }

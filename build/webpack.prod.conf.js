@@ -34,7 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
       // API_BASE: '"https://52.15.126.86:3000/"' // 没错，就是需要两层引号
-      API_BASE: '"https://fishing-log.tk:3000/"'
+      API_BASE: '"https://fishing-log.tk/"'
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
