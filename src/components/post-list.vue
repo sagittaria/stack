@@ -19,7 +19,7 @@
       </div>
     </template>
     <div style="border-bottom:1px solid #f2f2f2;height:14px;">
-      <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- Load More -- </el-button>
+      <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- {{loadMoreButtonText}} -- </el-button>
       <el-button type="text" size="mini" v-show="!hasMoreToLoad"> -- 我是有底线的 -- </el-button>
     </div>
   </div>
@@ -33,8 +33,9 @@ export default {
   data () {
     return {
       postList: [],
-      recentlyLoadedPage: 1,
-      hasMoreToLoad: true
+      lastLoadedPage: 1,
+      hasMoreToLoad: true,
+      loadMoreButtonText: 'Load More'
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -55,13 +56,15 @@ export default {
       if (!self.hasMoreToLoad) {
         return
       }
-      let page = (self.recentlyLoadedPage + 1)
+      self.loadMoreButtonText = 'Loading please wait...'
+      let page = (self.lastLoadedPage + 1)
       let rows = 7
       axios.get(util.api.post, {params: {page, rows}}).then(resp => {
         // console.log(resp)
-        self.recentlyLoadedPage++
+        self.lastLoadedPage++
         self.postList.push(...resp.data.list)
         self.hasMoreToLoad = resp.data.list.length === rows
+        self.loadMoreButtonText = 'Load More'
       })
     },
     markdownalize (srcText) {
