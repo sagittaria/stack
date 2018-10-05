@@ -2,6 +2,7 @@
   <el-container>
     <el-header>
       <div style="line-height:60px;">{{blogName}}</div>
+      <div><img title="[泪目] --By熊阿噜<咸鱼的日常>" src="/static/lacrimal.png"/></div>
       <div style="line-height:60px;">{{motto}}</div>
     </el-header>
     <el-main>
@@ -38,7 +39,7 @@ export default {
       let self = this
       let now = new Date().getTime()
       if (now - self.$store.state.cache.lastCachedAt > self.expirationMinutes * 60 * 1000) { // 如果已超时，去数据库里重新捞一把
-        axios.get(util.api.post + 'cache').then(resp => {
+        axios.get(util.api.postCache).then(resp => {
           let lastCachedStuff = resp.data
           lastCachedStuff.lastCachedAt = now
           self.$store.dispatch('updateCachedStuff', lastCachedStuff)

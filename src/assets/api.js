@@ -5,7 +5,8 @@ const api = {
   // logout: '/logout',
 
   // post
-  post: '/stack/post/'
+  post: '/stack/post/',
+  postCache: '/stack/post/cache'
 }
 
 export default api
