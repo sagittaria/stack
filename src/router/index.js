@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/index.vue'
+// import index from '@/components/index.vue'
+import index from '@/components/v2/index.vue'
 import master from '@/components/master/master.vue'
 
 Vue.use(Router)
@@ -11,7 +12,7 @@ export default new Router({
       path: '/',
       component: index,
       children: [
-        {path: '', name: 'post-list', component: resolve => require(['../components/post-list.vue'], resolve)}
+        {path: '', name: 'post-list', component: resolve => require(['../components/v2/post-list.vue'], resolve)}
       ]
     },
     // {path: '/login', component: resolve => require(['../components/login.vue'], resolve)},

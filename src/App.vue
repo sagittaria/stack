@@ -20,6 +20,9 @@ export default {
   /*margin-top: 60px;*/
 }
 html{
-  font-size:12px;
+  font-size:17px;
+}
+body{
+  margin: 0px;
 }
 </style>
