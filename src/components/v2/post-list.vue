@@ -2,12 +2,12 @@
   <div class="post-list">
     <div class="post" v-for="p in postList" v-bind:key="p._id">
       <div class="post-head">
-        <div class="post-head-title">{{p.title}}</div>
+        <div class="post-head-title"><small style="color:#909399">[{{p.category}}]</small> {{p.title}}</div>
         <div class="post-head-tags-wrapper">
           <el-tag type="info" size="mini" v-for="t in p.tags" v-bind:key="t">{{t}}</el-tag>
         </div>
       </div>
-      <div class="post-body">{{p.body}}</div>
+      <div class="post-body">{{p.body | postBodyFilter}}</div>
       <div class="post-foot">updated @ {{p.updatedAt | formatLocalTime}}</div>
     </div>
     <div style="height:14px;text-align:center;">
@@ -32,17 +32,30 @@ export default{
       loadMoreButtonText: 'Load More'
     }
   },
+  watch: {
+    '$route': function () {
+      this.lastLoadedPage = 1
+      this.hasMoreToLoad = true
+      this.getPosts(1, 7)
+    }
+  },
   filters: {
     formatLocalTime (d) {
       return moment(d).utcOffset(moment().utcOffset()).format('YYYY-MM-DD HH:mm:ss')
-    }
+    },
+    postBodyFilter: util.filters.postBodyFilter
   },
   created () {
     this.postList = this.getPosts(1, 7)
   },
   methods: {
     getPosts (page, size) {
-      axios.get(util.api.post, {params: {page, size}}).then(resp => {
+      let queryParams = {page, size}
+      let category = this.$route.query.category
+      if (category) {
+        queryParams = {...queryParams, category}
+      }
+      axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         this.postList = resp.data.list
       })
@@ -55,7 +68,12 @@ export default{
       self.loadMoreButtonText = 'Loading please wait...'
       let page = (self.lastLoadedPage + 1)
       let size = 7
-      axios.get(util.api.post, {params: {page, size}}).then(resp => {
+      let queryParams = {page, size}
+      let category = this.$route.query.category
+      if (category) {
+        queryParams = {...queryParams, category}
+      }
+      axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         self.lastLoadedPage++
         self.postList.push(...resp.data.list)

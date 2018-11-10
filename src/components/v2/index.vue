@@ -4,9 +4,10 @@
         display:flex;justify-content:center;">
       <div class="header-item motto hidden-sm-and-down">{{motto}}</div>
       <div class="header-item category-list">
-        <div class="category">idea({{categoryCount.idea}})</div>
-        <div class="category">tech({{categoryCount.tech}})</div>
-        <div class="category">other({{categoryCount.other}})</div>
+        <div class="category" @click="categorized()">Home</div>
+        <div class="category" @click="categorized('idea')">Idea<small>({{categoryCount.idea}})</small></div>
+        <div class="category" @click="categorized('tech')">Tech<small>({{categoryCount.tech}})</small></div>
+        <div class="category" @click="categorized('other')">Other<small>({{categoryCount.other}})</small></div>
       </div>
     </el-header>
     <el-main style="padding-top:70px;">
@@ -60,6 +61,9 @@ export default {
           self.$store.dispatch('updateCachedStuff', lastCachedStuff)
         })
       }
+    },
+    categorized (category) {
+      this.$router.push({path: '/', query: (category ? { category } : {}), replace: true})
     }
   }
 }
@@ -78,5 +82,8 @@ export default {
   min-width:280px;
   display: flex;
   justify-content: space-between;
+}
+.category{
+  cursor: pointer;
 }
 </style>
