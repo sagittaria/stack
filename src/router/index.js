@@ -13,7 +13,7 @@ export default new Router({
       component: index,
       children: [
         {path: '', name: 'post-list', component: resolve => require(['../components/v2/post-list.vue'], resolve)},
-        {path: '/:ts', name: 'post-detail', component: resolve => require(['../components/v2/post-detail.vue'], resolve)}
+        {path: '/:id', name: 'post-detail', component: resolve => require(['../components/v2/post-detail.vue'], resolve)}
       ]
     },
     // {path: '/login', component: resolve => require(['../components/login.vue'], resolve)},

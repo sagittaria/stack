@@ -3,7 +3,7 @@
     <div class="post" v-for="p in postList" v-bind:key="p._id">
       <div class="post-head">
         <div class="post-head-title"><small class="fuze-outer" @click="categorized(p.category)">[{{p.category}}]</small>
-          <span class="fuze" @click="viewDetail(p.updatedAt)">{{p.title}}</span></div>
+          <span class="fuze" @click="viewDetail(p._id)">{{p.title}}</span></div>
         <div class="post-head-tags-wrapper">
           <el-tag type="info" size="mini" v-for="t in p.tags" v-bind:key="t">{{t}}</el-tag>
         </div>
@@ -87,9 +87,8 @@ export default{
     categorized (category) {
       this.$router.push({path: '/', query: (category ? { category } : {}), replace: true})
     },
-    viewDetail (updatedAt) {
-      let ts = new Date(updatedAt).getTime() / 1000
-      this.$router.push({path: `/${ts}`})
+    viewDetail (id) {
+      this.$router.push({path: `/${id}`})
     }
   }
 }

@@ -3,9 +3,8 @@ const post = {
     cachedPostList: []
   },
   getters: {
-    extract: (state) => (ts) => {
-      let post = state.cachedPostList.find(p => { return new Date(p.updatedAt).getTime() / 1000 === Number(ts) })
-      return post
+    extract: (state) => (id) => {
+      return state.cachedPostList.find(p => { return p._id === id })
     }
   },
   mutations: {

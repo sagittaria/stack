@@ -7,19 +7,38 @@
 
 <script>
 import util from '@/assets/util.js'
+import axios from 'axios'
 
 export default {
   name: 'post-detail',
   data () {
-    return {}
+    return {
+      post: {
+        title: '',
+        body: ''
+      }
+    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.getPost()
+    })
   },
   computed: {
-    post () {
-      let ts = this.$route.params.ts
-      return this.$store.getters.extract(ts)
-    },
     postBodyHtml () {
       return util.filters.md2htmlFilter(this.post.body)
+    }
+  },
+  methods: {
+    getPost () {
+      let p = this.$store.getters.extract(this.$route.params.id)
+      if (p) {
+        this.post = p
+      } else {
+        axios.get(util.api.post + this.$route.params.id).then(resp => {
+          this.post = resp.data
+        })
+      }
     }
   }
 }
