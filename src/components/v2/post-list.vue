@@ -2,7 +2,8 @@
   <div class="post-list">
     <div class="post" v-for="p in postList" v-bind:key="p._id">
       <div class="post-head">
-        <div class="post-head-title"><small style="color:#909399">[{{p.category}}]</small> {{p.title}}</div>
+        <div class="post-head-title"><small class="fuze-outer" @click="categorized(p.category)">[{{p.category}}]</small>
+          <span class="fuze" @click="viewDetail(p.updatedAt)">{{p.title}}</span></div>
         <div class="post-head-tags-wrapper">
           <el-tag type="info" size="mini" v-for="t in p.tags" v-bind:key="t">{{t}}</el-tag>
         </div>
@@ -58,6 +59,7 @@ export default{
       axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         this.postList = resp.data.list
+        this.$store.commit('CACHE_POST', this.postList)
       })
     },
     loadMorePosts () {
@@ -79,7 +81,15 @@ export default{
         self.postList.push(...resp.data.list)
         self.hasMoreToLoad = resp.data.list.length === size
         self.loadMoreButtonText = 'Load More'
+        self.$store.commit('CACHE_POST', self.postList)
       })
+    },
+    categorized (category) {
+      this.$router.push({path: '/', query: (category ? { category } : {}), replace: true})
+    },
+    viewDetail (updatedAt) {
+      let ts = new Date(updatedAt).getTime() / 1000
+      this.$router.push({path: `/${ts}`})
     }
   }
 }
@@ -109,5 +119,17 @@ export default{
   font-size: 0.8rem;
   text-align: right;
   color: #ccc
+}
+.fuze-outer, .fuze{
+  cursor: pointer
+}
+.fuze:hover{
+  color: #622954
+}
+.fuze-outer{
+  color: #909399
+}
+.fuze-outer:hover{
+  color: #62295455
 }
 </style>
