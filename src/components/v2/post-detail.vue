@@ -1,7 +1,7 @@
 <template>
   <div class="post-detail">
     <div class="post-head">{{post.title}}</div>
-    <div class="post-body" v-html="postBodyHtml"></div>
+    <div class="post-body" v-html="postBodyHtml" v-highlight></div>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     postBodyHtml () {
-      return util.filters.md2htmlFilter(this.post.body)
+      return util.filters.md2html(this.post.body)
     }
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
         this.post = p
       } else {
         axios.get(util.api.post + this.$route.params.id).then(resp => {
-          this.post = resp.data
+          this.post = resp.data.post
         })
       }
     }

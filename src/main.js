@@ -2,9 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import EUI from 'element-ui'
-// import './assets/element-#D4002A/index.css'
 import './assets/element-#622954/index.css'
 // import 'element-ui/lib/theme-chalk/index.css'
+
+import 'highlight.js/styles/github.css'
+import hljs from 'highlight.js'
+
 import App from './App'
 import router from './router'
 import store from './store'
@@ -12,6 +15,13 @@ import axios from 'axios'
 
 Vue.use(EUI)
 Vue.config.productionTip = false
+
+Vue.directive('highlight', function (el) {
+  let blocks = el.querySelectorAll('pre code')
+  blocks.forEach((block) => {
+    hljs.highlightBlock(block)
+  })
+})
 
 /* eslint-disable */
 if (typeof API_BASE !== 'undefined') {

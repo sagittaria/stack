@@ -1,17 +1,18 @@
-var md = require('markdown').markdown
+var showdown = require('showdown')
+var converter = new showdown.Converter()
 var cheerio = require('cheerio')
 
-let postBodyFilter = function (b) {
-  let $ = cheerio.load(md.toHTML(b))
-  return $.text().substr(0, 200) + ($.text().length > 200 ? '...' : '')
+let md2html = function (bodyMd) {
+  return converter.makeHtml(bodyMd)
 }
 
-let md2htmlFilter = function (body) {
-  return md.toHTML(body)
+let html2text = function (bodyHtml) {
+  return cheerio.load(bodyHtml).text()
 }
 
 let filters = {}
-filters.postBodyFilter = postBodyFilter
-filters.md2htmlFilter = md2htmlFilter
+
+filters.md2html = md2html
+filters.html2text = html2text
 
 export default filters

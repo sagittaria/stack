@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <div><!--不要套el-container了，会影响内部样式-->
     <el-header style="z-index:999;width:100%;background-color:#622954CC;
         display:flex;justify-content:center;">
       <div class="header-item motto hidden-sm-and-down">{{motto}}</div>
@@ -18,7 +18,7 @@
       </el-row>
     </el-main>
     <el-footer></el-footer>
-  </el-container>
+  </div>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
   name: 'index',
   data () {
     return {
-      motto: '本性不移',
+      motto: 'Avenir',
       expirationMinutes: 5 // 缓存失效时间（分钟）
     }
   },

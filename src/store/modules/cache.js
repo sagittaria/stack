@@ -1,4 +1,4 @@
-import util from '@/assets/util.js'
+import moment from 'moment'
 
 const cacheStateDefault = {
   categoryCount: {
@@ -14,7 +14,6 @@ const cache = {
   state: JSON.parse(sessionStorage.getItem('cacheState')) || cacheStateDefault,
   getters: {
     normalizedLastCachedAt: state => {
-      let moment = util.kits.moment
       return moment(state.lastCachedAt).utcOffset(moment().utcOffset()).format('HH:mm:ss')
     }
   },

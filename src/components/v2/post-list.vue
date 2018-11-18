@@ -8,7 +8,7 @@
           <el-tag type="info" size="mini" v-for="t in p.tags" v-bind:key="t">{{t}}</el-tag>
         </div>
       </div>
-      <div class="post-body">{{p.body | postBodyFilter}}</div>
+      <div class="post-body">{{p.body | md2html | html2text}}</div>
       <div class="post-foot">updated @ {{p.updatedAt | formatLocalTime}}</div>
     </div>
     <div style="height:14px;text-align:center;">
@@ -21,7 +21,7 @@
 <script>
 import axios from 'axios'
 import moment from 'moment'
-import util from '@/assets/util.js'
+import util from '@/assets/util'
 
 export default{
   name: 'post-list',
@@ -44,7 +44,8 @@ export default{
     formatLocalTime (d) {
       return moment(d).utcOffset(moment().utcOffset()).format('YYYY-MM-DD HH:mm:ss')
     },
-    postBodyFilter: util.filters.postBodyFilter
+    md2html: util.filters.md2html,
+    html2text: util.filters.html2text
   },
   created () {
     this.postList = this.getPosts(1, 7)
@@ -113,6 +114,10 @@ export default{
   font-size: 15px;
   margin: 15px 0;
   line-height: 1.3rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 .post-foot{
   font-size: 0.8rem;
