@@ -3,7 +3,7 @@
     <div class="post-head">
       <div class="title-and-tags">
         {{post.title}}
-        <el-tag type="info" size="mini" v-for="t in post.tags" v-bind:key="t">{{t}}</el-tag>
+        <el-tag type="info" size="mini" style="margin-left:7px;" v-for="t in post.tags" v-bind:key="t">{{t}}</el-tag>
       </div>
       <div class="updated-at">{{post.updatedAt | toLocalTime}}</div>
     </div>

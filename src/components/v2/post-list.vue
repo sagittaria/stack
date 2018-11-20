@@ -45,7 +45,7 @@ export default{
     html2text: util.filters.html2text
   },
   created () {
-    this.postList = this.getPosts(1, 7)
+    this.getPosts(1, 7)
   },
   methods: {
     getPosts (page, size) {
@@ -112,9 +112,9 @@ export default{
   margin: 15px 0;
   line-height: 1.3rem;
   display: -webkit-box;
-  /* autoprefixer: off */
+  /*! autoprefixer: off */
   -webkit-box-orient: vertical;
-  /* autoprefixer: on */
+  /*! autoprefixer: on */
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
