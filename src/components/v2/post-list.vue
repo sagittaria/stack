@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="post-body">{{p.body | md2html | html2text}}</div>
-      <div class="post-foot">updated @ {{p.updatedAt | formatLocalTime}}</div>
+      <div class="post-foot">updated @ {{p.updatedAt | toLocalTime}}</div>
     </div>
     <div style="height:14px;text-align:center;">
       <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- {{loadMoreButtonText}} -- </el-button>
@@ -20,7 +20,6 @@
 
 <script>
 import axios from 'axios'
-import moment from 'moment'
 import util from '@/assets/util'
 
 export default{
@@ -41,9 +40,7 @@ export default{
     }
   },
   filters: {
-    formatLocalTime (d) {
-      return moment(d).utcOffset(moment().utcOffset()).format('YYYY-MM-DD HH:mm:ss')
-    },
+    toLocalTime: util.filters.toLocalTime,
     md2html: util.filters.md2html,
     html2text: util.filters.html2text
   },
