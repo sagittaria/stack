@@ -5,9 +5,10 @@
         {{post.title}}
         <el-tag type="info" size="mini" style="margin-left:7px;" v-for="t in post.tags" v-bind:key="t">{{t}}</el-tag>
       </div>
-      <div class="updated-at">{{post.updatedAt | toLocalTime}}</div>
+      <div class="updated-at">@ {{post.updatedAt | toLocalTime}}</div>
     </div>
     <div class="post-body" v-html="postBodyHtml" v-highlight></div>
+    <div style="background-color: #dbdbdb">评论区占位</div>
   </div>
 </template>
 
@@ -57,10 +58,16 @@ export default {
 .post-head{
   display: flex;
   justify-content: space-between;
-  font-size: 24px;
+  font-size: 30px;
 }
 .post-body{
   font-size: 15px;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  margin: 15px 0;
+  padding: 20px 5px;
+  line-height: 1.5rem;
+  min-height: 500px;
 }
 .updated-at{
   font-size: 0.8rem;

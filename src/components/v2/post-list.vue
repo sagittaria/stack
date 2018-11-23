@@ -36,7 +36,7 @@ export default{
     '$route': function () {
       this.lastLoadedPage = 1
       this.hasMoreToLoad = true
-      this.getPosts(1, 7)
+      this.getPosts(1, 48)
     }
   },
   filters: {
@@ -45,7 +45,7 @@ export default{
     html2text: util.filters.html2text
   },
   created () {
-    this.getPosts(1, 7)
+    this.getPosts(1, 48)
   },
   methods: {
     getPosts (page, size) {
@@ -67,7 +67,7 @@ export default{
       }
       self.loadMoreButtonText = 'Loading please wait...'
       let page = (self.lastLoadedPage + 1)
-      let size = 7
+      let size = 48
       let queryParams = {page, size}
       let category = this.$route.query.category
       if (category) {
@@ -110,7 +110,7 @@ export default{
 .post-body{
   font-size: 15px;
   margin: 15px 0;
-  line-height: 1.3rem;
+  line-height: 1.5rem;
   display: -webkit-box;
   /*! autoprefixer: off */
   -webkit-box-orient: vertical;
