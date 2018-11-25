@@ -1,23 +1,25 @@
 <template>
-  <div><!--不要套el-container了，会影响内部样式-->
+  <div class="index-layout"><!--不要套el-container了，会影响内部样式-->
     <el-header style="z-index:999;width:100%;background-color:#622954CC;
         display:flex;justify-content:center;">
       <div class="header-item motto hidden-sm-and-down">{{motto}}</div>
       <div class="header-item category-list">
-        <div class="category" @click="categorized()">Home</div>
+        <div class="category" @click="categorized()">Hot50</div>
         <div class="category" @click="categorized('idea')">Idea<small>({{categoryCount.idea}})</small></div>
         <div class="category" @click="categorized('tech')">Tech<small>({{categoryCount.tech}})</small></div>
         <div class="category" @click="categorized('other')">Other<small>({{categoryCount.other}})</small></div>
       </div>
     </el-header>
-    <el-main style="padding-top:70px;">
-      <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="14">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
-    </el-main>
-    <el-footer></el-footer>
+    <el-scrollbar style="height:calc(100vh - 60px)">
+      <el-main style="padding-top:70px;">
+        <el-row type="flex" justify="center">
+          <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="14">
+            <router-view></router-view>
+          </el-col>
+        </el-row>
+      </el-main>
+      <el-footer></el-footer>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -85,5 +87,10 @@ export default {
 }
 .category{
   cursor: pointer;
+}
+</style>
+<style>
+.index-layout .el-scrollbar__wrap {
+  overflow-x: hidden;
 }
 </style>
