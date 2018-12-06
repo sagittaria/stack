@@ -61,6 +61,7 @@ export default{
       if (category) {
         queryParams = {...queryParams, category}
       }
+      this.isLoading = true
       axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         this.postList = resp.data.list
