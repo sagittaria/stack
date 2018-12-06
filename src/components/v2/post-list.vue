@@ -15,6 +15,12 @@
       <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- {{loadMoreButtonText}} -- </el-button>
       <el-button type="text" size="mini" v-show="!hasMoreToLoad"> -- 我是有底线的 -- </el-button>
     </div>
+    <div
+      v-show="isLoading"
+      style="position:fixed;top:0;left:0; height: 100%;width:100%;background-color:#62295408;
+      display: flex;justify-content: center;align-items:center">
+      <img src="/static/loading-bars.svg"/>
+    </div>
   </div>
 </template>
 
@@ -29,7 +35,8 @@ export default{
       postList: [],
       lastLoadedPage: 1,
       hasMoreToLoad: true,
-      loadMoreButtonText: 'Load More'
+      loadMoreButtonText: 'Loading please wait...',
+      isLoading: true
     }
   },
   watch: {
@@ -57,7 +64,9 @@ export default{
       axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         this.postList = resp.data.list
+        this.loadMoreButtonText = 'Load More'
         this.$store.commit('CACHE_POST', this.postList)
+        this.isLoading = false
       })
     },
     loadMorePosts () {
@@ -73,6 +82,7 @@ export default{
       if (category) {
         queryParams = {...queryParams, category}
       }
+      self.isLoading = true
       axios.get(util.api.post, {params: queryParams}).then(resp => {
         // console.log(resp)
         self.lastLoadedPage++
@@ -80,6 +90,7 @@ export default{
         self.hasMoreToLoad = resp.data.list.length === size
         self.loadMoreButtonText = 'Load More'
         self.$store.commit('CACHE_POST', self.postList)
+        self.isLoading = false
       })
     },
     categorized (category) {
