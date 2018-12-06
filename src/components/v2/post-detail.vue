@@ -80,7 +80,10 @@ export default {
     border-radius: 3px;
     padding: .2em .4em;
   }
-  .post-body p > code, .post-body  th {
+  .post-body p > code,
+  .post-body ol > li > code,
+  .post-body ul > li > code,
+  .post-body th {
     background-color: rgba(27,31,35,.05);
   }
   .post-body table {
