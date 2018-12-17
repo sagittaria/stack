@@ -86,6 +86,14 @@ export default {
   .post-body th {
     background-color: rgba(27,31,35,.05);
   }
+  .post-body > blockquote{
+    background-color: rgba(27,31,35,.03);
+    padding-left: 15px;
+    border-left: 3px solid #62295488;
+    line-height: 3em;
+    margin-left: 0;
+    margin-right: 0;
+  }
   .post-body table {
     border-collapse: collapse;
   }
