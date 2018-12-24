@@ -8,13 +8,16 @@
       <div class="updated-at">@ {{post.updatedAt | toLocalTime}}</div>
     </div>
     <div class="post-body" v-html="postBodyHtml" v-highlight></div>
-    <div style="background-color: #dbdbdb">评论区占位</div>
+    <div id="div-comment">评论区占位</div>
   </div>
 </template>
 
 <script>
 import util from '@/assets/util.js'
 import axios from 'axios'
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
+import cmt from '@/comment'
 
 export default {
   name: 'post-detail',
@@ -25,7 +28,8 @@ export default {
         body: '',
         updatedAt: '',
         tags: []
-      }
+      },
+      gitalk: null
     }
   },
   filters: { toLocalTime: util.filters.toLocalTime },
@@ -39,14 +43,27 @@ export default {
       return util.filters.md2html(this.post.body)
     }
   },
+  mounted () {
+    this.gitalk = new Gitalk({
+      clientID: cmt.client_id,
+      clientSecret: cmt.client_secret,
+      repo: 'stack-comment',
+      owner: 'sagittaria',
+      admin: ['sagittaria'],
+      id: window.location.hash.substr(2),
+      distractionFreeMode: false
+    })
+  },
   methods: {
     getPost () {
       let p = this.$store.getters.extract(this.$route.params.id)
       if (p) {
         this.post = p
+        this.gitalk.render('div-comment')
       } else {
         axios.get(util.api.post + this.$route.params.id).then(resp => {
           this.post = resp.data.post
+          this.gitalk.render('div-comment')
         })
       }
     }
