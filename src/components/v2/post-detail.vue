@@ -8,7 +8,7 @@
       <div class="updated-at">@ {{post.updatedAt | toLocalTime}}</div>
     </div>
     <div class="post-body" v-html="postBodyHtml" v-highlight></div>
-    <div id="div-comment">评论区占位</div>
+    <div id="div-comment"></div>
   </div>
 </template>
 

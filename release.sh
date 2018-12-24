@@ -2,7 +2,7 @@ if [ ! -d dist ];then
   echo "没发现dist文件夹！"
 else
   echo "存在dist文件夹，正在删除..."
-  rm dist -rf
+  rm -rf dist
   echo "dist文件夹已删除！"
 fi
 
@@ -12,7 +12,7 @@ echo "构建完成！"
 
 echo "前往sagittaria.github.io清除旧版文件..."
 cd ../sagittaria.github.io
-rm static -rf
+rm -rf static
 rm index.html
 rm favicon.ico
 echo "旧版文件已清除！"
@@ -32,5 +32,5 @@ echo "正在发布..."
 echo "新版本发布完成！"
 
 echo "正在清理dist文件夹..."
-rm ../stack/dist -rf
+rm  -rf ../stack/dist
 echo "dist文件夹已清理！"
