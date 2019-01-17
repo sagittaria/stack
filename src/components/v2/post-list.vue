@@ -8,8 +8,8 @@
           <el-tag type="info" size="mini" v-for="t in p.tags" v-bind:key="t">{{t}}</el-tag>
         </div>
       </div>
-      <div class="post-body">{{p.body | md2html | html2text}}</div>
-      <div class="post-foot">updated @ {{p.updatedAt | toLocalTime}}</div>
+      <div class="post-body">{{p.body | md2html | html2text | text2truncate}}</div>
+      <div class="post-foot">published@ {{p._id | objectId2localTime}} | updated@ {{p.updatedAt | toLocalTime}}</div>
     </div>
     <div style="height:14px;text-align:center;">
       <el-button type="text" size="mini" @click="loadMorePosts" v-show="hasMoreToLoad"> -- {{loadMoreButtonText}} -- </el-button>
@@ -49,7 +49,9 @@ export default{
   filters: {
     toLocalTime: util.filters.toLocalTime,
     md2html: util.filters.md2html,
-    html2text: util.filters.html2text
+    html2text: util.filters.html2text,
+    text2truncate: util.filters.text2truncate,
+    objectId2localTime: util.filters.objectId2localTime
   },
   created () {
     this.getPosts(1, 48)
